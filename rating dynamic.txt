@@ -1,0 +1,145 @@
+    <div class=" section-{{ section.id }}-padding">
+  <div  class="tabconatainer ">
+  <div class="tab-customize page-width">
+
+ {% for block in section.blocks%}
+  {%- case block.type -%}
+      {%- when 'description' -%}
+     	 <h3 class="tablinks-cus" onclick="openTab(event, 'tab-{{ forloop.index }}')" {% if forloop.index == 1 %}id="tab-cus-active"{% endif %} >{{ block.settings.title}}</h3>
+
+ {%- when 'rating' -%}
+     	 <h3 class="tablinks-cus" onclick="openTab(event, 'tab-{{ forloop.index }}')" {% if forloop.index == 1 %}id="tab-cus-active"{% endif %} >{{ block.settings.title}}</h3>
+
+{%- when 'Details' -%}
+     	 <h3 class="tablinks-cus" onclick="openTab(event, 'tab-{{ forloop.index }}')" {% if forloop.index == 1 %}id="tab-cus-active"{% endif %} >{{ block.settings.title}}</h3>
+
+    {%- endcase -%}
+    {% endfor %}
+   
+</div>
+<!-- Tab content -->
+<div class="tab_content">
+   <div class=" page-width">
+
+
+ {% for block in section.blocks%}
+  {%- case block.type -%}
+      {%- when 'description' -%}
+     <div id="tab-{{ forloop.index }}" class="tabcontent-cus" {% if forloop.index == 1 %}style="display: block;"{% endif %}>
+ 	    {{product.description}}
+  </div>	
+
+ {%- when 'rating' -%}
+     	 <div id="tab-{{ forloop.index }}" class="tabcontent-cus" {% if forloop.index == 1 %}style="display: block;"{% endif %}>
+           <p>{{ block.settings.titlee}}</p>
+  </div>
+ {%- when 'Details' -%}
+     	 <div id="tab-{{ forloop.index }}" class="tabcontent-cus" {% if forloop.index == 1 %}style="display: block;"{% endif %}>
+           <p>{{ block.settings.page}}</p>
+  </div>
+
+    {%- endcase -%}
+    {% endfor %}
+
+   </div>
+  </div> 
+      </div>
+  </div>
+ 
+
+
+  <script>
+  function openTab(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent-cus");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks-cus");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+document.getElementById("tab-cus-active").click();
+  
+  
+  </script> 
+
+
+
+
+
+
+
+
+{% schema %}
+{
+  "name": "Product Tab",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "description",
+      "name": "description",
+      "limit": 1,
+    "settings":[
+        {
+          "type": "text",
+          "id": "title",
+          "label":"Title"
+        }
+      ]
+},
+     {
+      "type": "rating",
+      "name": "rating",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label":"Rating text"
+        },
+       {
+          "type": "liquid",
+          "id": "titlee",
+          "label":"Rating text"
+        }
+      ]
+    },
+     {
+      "type": "Details",
+      "name": "Details",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label":"Details text"
+        },
+       {
+          "type": "page",
+          "id": "page",
+          "label":"Details Page"
+        }
+      ]
+    }
+ 
+ 
+  ],
+ "presets": [
+     {
+       "name": "Product Tab"
+}
+]
+ }
+{% endschema %}
+
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
