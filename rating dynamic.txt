@@ -31,8 +31,10 @@
 
  {%- when 'rating' -%}
      	 <div id="tab-{{ forloop.index }}" class="tabcontent-cus" {% if forloop.index == 1 %}style="display: block;"{% endif %}>
-           <p>{{ block.settings.titlee}}</p>
-  </div>
+           // <p>{{ block.settings.titlee}}</p> // 
+             <div id="shopify-product-reviews" data-id="{{product.id}}">
+               {{ section.settings.rating_id}}{{ product.metafields.spr.reviews }}</div>
+              </div>
  {%- when 'Details' -%}
      	 <div id="tab-{{ forloop.index }}" class="tabcontent-cus" {% if forloop.index == 1 %}style="display: block;"{% endif %}>
            <p>{{ block.settings.page}}</p>
